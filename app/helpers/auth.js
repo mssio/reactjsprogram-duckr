@@ -4,7 +4,7 @@ export default function auth () {
       resolve({
         name: 'Mario Suharja',
         avatar: 'https://pbs.twimg.com/profile_images/698480433/57155393.jpg',
-        uuid: 'mssio',
+        uid: 'mssio',
       })
     }, 2000)
   })
