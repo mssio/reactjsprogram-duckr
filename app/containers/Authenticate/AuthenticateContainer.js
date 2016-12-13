@@ -5,11 +5,12 @@ import { bindActionCreators } from 'redux'
 import * as userActionCreators from 'redux/modules/users'
 
 class AuthenticateContainer extends Component {
-  handleAuth = () => {
+  handleAuth = (e) => {
+    e.preventDefault()
     this.props.fetchAndHandleAuthedUser()
+      .then(() => this.context.router.replace('feed'))
   }
   render () {
-    console.log('Is Fetching', this.props.isFetching)
     return (
       <Authenticate
         isFetching={this.props.isFetching}
@@ -25,8 +26,12 @@ AuthenticateContainer.propTypes = {
   fetchAndHandleAuthedUser: PropTypes.func.isRequired,
 }
 
+AuthenticateContainer.contextTypes = {
+  router: PropTypes.object.isRequired,
+}
+
 function mapStateToProps (state) {
-  console.log('STATE', state)
+  // console.log('STATE', state)
   return {
     isFetching: state.isFetching,
     error: state.error,
