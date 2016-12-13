@@ -16,6 +16,7 @@
   "author": "Mario <mario@mss.io>",
   "license": "ISC",
   "dependencies": {
+    "firebase": "^3.6.3",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
     "react-redux": "^4.4.6",
