@@ -92,7 +92,7 @@
   type: OPEN_MODAL,
 }
 
-  {
+{
   type: CLOSE_MODAL,
 }
 

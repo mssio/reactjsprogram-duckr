@@ -30,19 +30,7 @@ AuthenticateContainer.contextTypes = {
   router: PropTypes.object.isRequired,
 }
 
-function mapStateToProps (state) {
-  // console.log('STATE', state)
-  return {
-    isFetching: state.isFetching,
-    error: state.error,
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators(userActionCreators, dispatch)
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  ({users}) => ({isFetching: users.isFetching, error: users.error}),
+  (dispatch) => bindActionCreators(userActionCreators, dispatch)
 )(AuthenticateContainer)
