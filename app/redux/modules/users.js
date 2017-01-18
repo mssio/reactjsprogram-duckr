@@ -28,6 +28,7 @@ function fetchingUser () {
 }
 
 function fetchingUserFailure (error) {
+  console.warn(error)
   return {
     type: FETCHING_USER_FAILURE,
     error: 'Error fetching user.',
