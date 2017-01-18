@@ -43,7 +43,7 @@ function fetchingLikesSuccess (likes) {
   }
 }
 
-export function addHandleLike (duckId, e) {
+export function addAndHandleLike (duckId, e) {
   e.stopPropagation()
   return function (dispatch, getState) {
     dispatch(addLike(duckId))

@@ -7,12 +7,13 @@ import * as usersLikesActions from 'redux/modules/usersLikes'
 const { func, object, bool, number } = PropTypes
 
 class DuckContainer extends Component {
-  goToProfile (e) {
+
+  goToProfile = (e) => {
     e.stopPropagation()
     this.context.router.push('/' + this.props.duck.uid)
   }
 
-  handleClick (e) {
+  handleClick = (e) => {
     e.stopPropagation()
     this.context.router.push('/duckDetail/' + this.props.duck.duckId)
   }
@@ -34,7 +35,7 @@ DuckContainer.propTypes = {
   hideLikeCount: bool.isRequired,
   hideReplyBtn: bool.isRequired,
   handleDeleteLike: func.isRequired,
-  addHandleLike: func.isRequired,
+  addAndHandleLike: func.isRequired,
 }
 
 DuckContainer.defaultProps = {
@@ -43,7 +44,7 @@ DuckContainer.defaultProps = {
 }
 
 DuckContainer.contextTypes = {
-  router: object.isRequired,
+  router: object.isRequired
 }
 
 function mapStateToProps ({ducks, likeCount, usersLikes}, props) {
