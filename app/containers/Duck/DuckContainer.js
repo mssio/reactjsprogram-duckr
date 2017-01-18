@@ -44,7 +44,7 @@ DuckContainer.defaultProps = {
 }
 
 DuckContainer.contextTypes = {
-  router: object.isRequired
+  router: object.isRequired,
 }
 
 function mapStateToProps ({ducks, likeCount, usersLikes}, props) {

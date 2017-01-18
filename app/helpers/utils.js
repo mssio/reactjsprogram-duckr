@@ -18,5 +18,5 @@ export function formatDuck (text, {name, avatar, uid}) {
 
 export function formatTimestamp (timestamp) {
   const date = new Date(timestamp)
-  return `${date.getMonth() +1}/${date.getDate()}/${date.getFullYear()}`
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 }
