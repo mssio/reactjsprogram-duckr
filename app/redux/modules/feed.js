@@ -58,7 +58,7 @@ export function setAndHandleFeedListener () {
         ? dispatch(settingFeedListenerSuccess(sortedIds))
         : dispatch(addNewDuckIdToFeed(sortedIds[0]))
       initialFetch = false
-    }, (error) => dispatch(settingFeedListenerError()))
+    }, (error) => dispatch(settingFeedListenerError(error)))
   }
 }
 
