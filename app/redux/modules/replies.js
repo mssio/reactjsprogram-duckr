@@ -1,4 +1,4 @@
-import { postReply } from 'helpers/api'
+import { postReply, fetchReplies } from 'helpers/api'
 
 const ADD_REPLY = 'ADD_REPLY'
 const ADD_REPLY_ERROR = 'ADD_REPLY_ERROR'
@@ -53,6 +53,30 @@ function fetchingRepliesSuccess (duckId, replies) {
   }
 }
 
+export function addAndHandleReply (duckId, reply) {
+  return function (dispatch) {
+    const { replyWithId, replyPromise } = postReply(duckId, reply)
+
+    dispatch(addReply(duckId, replyWithId))
+    replyPromise.catch((error) => {
+      dispatch(removeReply(duckId, replyWithId.replyId))
+      dispatch(addReplyError(error))
+    })
+  }
+}
+
+export function fetchAndHandleReplies (duckId) {
+  return function (dispatch) {
+    dispatch(fetchingReplies())
+
+    fetchReplies(duckId)
+      .then((replies) => {
+        dispatch(fetchingRepliesSuccess(duckId, replies))
+      })
+      .catch((error) => dispatch(fetchingRepliesError(error)))
+  }
+}
+
 const initialReply = {
   name: '',
   reply: '',
@@ -84,7 +108,7 @@ const initialDuckState = {
   replies: {},
 }
 
-function repliesAndLastUpated (state = initialDuckState, action) {
+function repliesAndLastUpdated (state = initialDuckState, action) {
   switch (action.type) {
     case FETCHING_REPLIES_SUCCESS :
       return {
@@ -100,18 +124,6 @@ function repliesAndLastUpated (state = initialDuckState, action) {
       }
     default :
       return state
-  }
-}
-
-export function addAndHandleReply (duckId, reply) {
-  return function (dispatch) {
-    const { replyWithId, replyPromise } = postReply(duckId, reply)
-
-    dispatch(addReply(duckId, replyWithId))
-    replyPromise.catch((error) => {
-      dispatch(removeReply(duckId, replyWithId.replyId))
-      dispatch(addReplyError(error))
-    })
   }
 }
 
@@ -141,7 +153,7 @@ export default function replies (state = initialState, action) {
         ...state,
         isFetching: false,
         error: '',
-        [action.duckId]: repliesAndLastUpated(state[action.duckId], action),
+        [action.duckId]: repliesAndLastUpdated(state[action.duckId], action),
       }
     default :
       return state

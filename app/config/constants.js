@@ -16,3 +16,4 @@ export const firebaseAuth = firebase.auth
 
 export const userExpirationLength = 100000
 export const usersDucksExpirationLength = 100000
+export const repliesExpirationLength = 300000
