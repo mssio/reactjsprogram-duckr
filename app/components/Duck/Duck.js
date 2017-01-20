@@ -7,10 +7,17 @@ import {
   duckContainer, contentContainer, avatar, actionContainer,
   header, text, likeReplyContainer, icon, likedIcon, author,
 } from './styles.css'
-import { Map } from 'immutable'
+import ImmutablePropTypes from 'react-immutable-proptypes'
 
 Duck.propTypes = {
-  duck: PropTypes.instanceOf(Map),
+  duck: ImmutablePropTypes.contains({
+    avatar: PropTypes.string.isRequired,
+    duckId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    timestamp: PropTypes.number.isRequired,
+    uid: PropTypes.string.isRequired,
+  }),
   onClick: PropTypes.func,
   isLiked: PropTypes.bool.isRequired,
   addAndHandleLike: PropTypes.func.isRequired,
